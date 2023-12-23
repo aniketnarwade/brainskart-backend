@@ -4,6 +4,27 @@ const Product = require('../models/Product');
 const authenticate = require('../middlewares/authenticate');
 const {check , validationResult} = require('express-validator');
 
+
+
+    /*
+    4. Get Wtch’s Collection
+    URL	/product/watch
+    Fields	No-fields
+    Method	GET
+    Access	PUBLIC
+
+ */
+    router.get('/watch', async (request , response) => {
+        // Get Kid’s Collection	Logic
+        try {
+            let products = await Product.find({category : "WATCH"});
+            response.status(200).json(products);
+        }
+        catch (error) {
+            console.error(error);
+            response.status(500).json({errors : [{msg : 'Server Error'}]});
+        }
+    });
 /*
     	1. Upload a Product
         URL	/product/upload
@@ -111,25 +132,7 @@ router.get('/kids', async (request , response) => {
     }
 });
 
-/*
-    4. Get Kid’s Collection
-    URL	/product/kids
-    Fields	No-fields
-    Method	GET
-    Access	PUBLIC
 
- */
-router.get('/kids', async (request , response) => {
-    // Get Kid’s Collection	Logic
-    try {
-        let products = await Product.find({category : "KIDS"});
-        response.status(200).json(products);
-    }
-    catch (error) {
-        console.error(error);
-        response.status(500).json({errors : [{msg : 'Server Error'}]});
-    }
-});
 
 /*
     5. Get a Product
@@ -152,25 +155,7 @@ router.get('/:id', async (request , response) => {
     }
 });
 
-/*
-    4. Get Kid’s Collection
-    URL	/product/kids
-    Fields	No-fields
-    Method	GET
-    Access	PUBLIC
 
- */
-    router.get('/watch', async (request , response) => {
-        // Get Kid’s Collection	Logic
-        try {
-            let products = await Product.find({category : "WATCH"});
-            console.log(products.length,products)
-            response.status(200).json(products);
-        }
-        catch (error) {
-            console.error(error);
-            response.status(500).json({errors : [{msg : 'Server Error'}]});
-        }
-    });
+
 
 module.exports = router;
