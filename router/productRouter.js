@@ -112,6 +112,26 @@ router.get('/kids', async (request , response) => {
 });
 
 /*
+    4. Get Kid’s Collection
+    URL	/product/kids
+    Fields	No-fields
+    Method	GET
+    Access	PUBLIC
+
+ */
+router.get('/kids', async (request , response) => {
+    // Get Kid’s Collection	Logic
+    try {
+        let products = await Product.find({category : "KIDS"});
+        response.status(200).json(products);
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).json({errors : [{msg : 'Server Error'}]});
+    }
+});
+
+/*
     5. Get a Product
     URL	/product/:id
     Fields	No-fields
@@ -131,5 +151,25 @@ router.get('/:id', async (request , response) => {
         response.status(500).json({errors : [{msg : 'Server Error'}]});
     }
 });
+
+/*
+    4. Get Kid’s Collection
+    URL	/product/kids
+    Fields	No-fields
+    Method	GET
+    Access	PUBLIC
+
+ */
+    router.get('/watch', async (request , response) => {
+        // Get Kid’s Collection	Logic
+        try {
+            let products = await Product.find({category : "WATCH"});
+            response.status(200).json(products);
+        }
+        catch (error) {
+            console.error(error);
+            response.status(500).json({errors : [{msg : 'Server Error'}]});
+        }
+    });
 
 module.exports = router;
