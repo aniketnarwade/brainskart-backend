@@ -164,6 +164,7 @@ router.get('/:id', async (request , response) => {
         // Get Kid’s Collection	Logic
         try {
             let products = await Product.find({category : "WATCH"});
+            console.log(products.length,products)
             response.status(200).json(products);
         }
         catch (error) {
