@@ -57,7 +57,7 @@ router.post('/',[
 router.get('/', authenticate, async (request , response) => {
     // To Get All Orders	Logic
     try {
-        let orders = await Order.find();
+        let orders = await Order.find().sort({ created: 'desc' });
         response.status(200).json({
             result : 'success',
             orders : orders
